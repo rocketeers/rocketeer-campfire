@@ -31,17 +31,23 @@ class RocketeerCampfireServiceProvider extends ServiceProvider
 	 */
 	public function boot()
 	{
-		Rocketeer::after('deploy', function ($task) {
+		Rocketeer::execute(function ($task) {
+			// Get what was deployed
 			$branch     = $task->rocketeer->getRepositoryBranch();
 			$stage      = $task->rocketeer->getStage();
 			$connection = $task->rocketeer->getConnection();
-			$path       = $task->releasesManager->getCurrentReleasePath();
+
+			// Get hostname and username
+			$credentials = array_get($task->rocketeer->getAvailableConnections(), $connection);
+			$host        = array_get($credentials, 'host');
+			$user        = array_get($credentials, 'username');
 			if ($stage) {
 				$connection = $stage.'@'.$connection;
 			}
 
-			$message = 'Just deployed branch %s on server %s, in %s';
-			$message = sprintf($message, $branch, $connection, $path);
+			// Build message
+			$message = '%s finished deploying branch "%s" on "%s" (%s)';
+			$message = sprintf($message, $user, $branch, $connection, $host);
 
 			$task->campfire->send($message);
 		});
