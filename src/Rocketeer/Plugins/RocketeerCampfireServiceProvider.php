@@ -31,16 +31,22 @@ class RocketeerCampfireServiceProvider extends ServiceProvider
 	 */
 	public function boot()
 	{
-		Rocketeer::execute(function ($task) {
+		Rocketeer::after('deploy', function ($task) {
+			// Get user name
+			$user = $task->server->getValue('campfire.name');
+			if (!$user) {
+				$user = $task->command->ask('Who is deploying ?');
+				$task->server->setValue('campfire.name', $user);
+			}
+
 			// Get what was deployed
 			$branch     = $task->rocketeer->getRepositoryBranch();
 			$stage      = $task->rocketeer->getStage();
 			$connection = $task->rocketeer->getConnection();
 
-			// Get hostname and username
+			// Get hostname
 			$credentials = array_get($task->rocketeer->getAvailableConnections(), $connection);
 			$host        = array_get($credentials, 'host');
-			$user        = array_get($credentials, 'username');
 			if ($stage) {
 				$connection = $stage.'@'.$connection;
 			}
