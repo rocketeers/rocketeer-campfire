@@ -53,6 +53,7 @@ class RocketeerCampfireServiceProvider extends ServiceProvider
 
 			// Build message
 			$message = $task->config->get('rocketeer-campfire::message');
+			$message = preg_replace('#\{([0-9])\}#', '%$1\$s', $message);
 			$message = sprintf($message, $user, $branch, $connection, $host);
 
 			$task->campfire->send($message);

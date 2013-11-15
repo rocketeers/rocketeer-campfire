@@ -13,6 +13,6 @@ return array(
 	// 2: Branch
 	// 3: Connection and stage
 	// 4: Host
-	'message' => '%1$s finished deploying branch "%2$s" on "%3$s" (%4$s)',
+	'message' => '{1} finished deploying branch "{2}" on "{3}" ({4})',
 
 );
