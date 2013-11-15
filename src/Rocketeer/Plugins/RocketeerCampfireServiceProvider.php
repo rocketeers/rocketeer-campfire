@@ -17,7 +17,7 @@ class RocketeerCampfireServiceProvider extends ServiceProvider
 	 */
 	public function register()
 	{
-    $this->app['config']->package('anahkiasen/rocketeer-campfire', __DIR__.'/../../config');
+		$this->app['config']->package('anahkiasen/rocketeer-campfire', __DIR__.'/../../config');
 
 		$this->app->bind('campfire', function ($app) {
 			return new Campfire($app['config']->get('rocketeer-campfire::config'));
