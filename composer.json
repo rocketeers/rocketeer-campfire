@@ -1,6 +1,13 @@
 {
 	"name": "anahkiasen/rocketeer-campfire",
 	"description": "A Campfire plugin for Rocketeer",
+  "license": "MIT",
+  "keywords": [
+    "rocketeer",
+    "deployment",
+    "campfire",
+    "laravel"
+  ],
 	"authors": [
 		{
 			"name": "Maxime Fabre",
