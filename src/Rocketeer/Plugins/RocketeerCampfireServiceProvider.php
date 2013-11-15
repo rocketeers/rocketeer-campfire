@@ -2,6 +2,7 @@
 namespace Rocketeer\Plugins;
 
 use Rocketeer\Facades\Rocketeer;
+use Illuminate\Support\ServiceProvider;
 
 /**
  * Register the Campfire plugin with the Laravel framework and Rocketeer
@@ -15,7 +16,7 @@ class RocketeerCampfireServiceProvider extends ServiceProvider
 	 */
 	public function register()
 	{
-    $app['config']->package('anahkiasen/rocketeer-campfire', __DIR__.'/../../config');
+    $this->app['config']->package('anahkiasen/rocketeer-campfire', __DIR__.'/../../config');
 
 		$this->app->bind('rocketeer.campfire', function ($app) {
 			return new Campfire($app['config']->get('rocketeer-campfire.config'));
@@ -30,7 +31,14 @@ class RocketeerCampfireServiceProvider extends ServiceProvider
 	public function boot()
 	{
 		Rocketeer::after('deploy', function ($task) {
-			$task->campfire->send('Just deployed branch {branch} on {stage}@{server}');
+			$branch     = $task->rocketeer->getRepositoryBranch();
+			$stage      = $task->rocketeer->getStage();
+			$connection = $task->rocketeer->getConnection();
+
+			$message = 'Just deployed branch %s on %s@%s';
+			$message = sprintf($message, $branch, $stage, $connection);
+
+			$task->campfire->send($message);
 		});
 	}
 }
