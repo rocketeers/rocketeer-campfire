@@ -52,7 +52,7 @@ class RocketeerCampfireServiceProvider extends ServiceProvider
 			}
 
 			// Build message
-			$message = '%s finished deploying branch "%s" on "%s" (%s)';
+			$message = $task->config->get('rocketeer-campfire::message');
 			$message = sprintf($message, $user, $branch, $connection, $host);
 
 			$task->campfire->send($message);
