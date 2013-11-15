@@ -1,8 +1,9 @@
 <?php
 namespace Rocketeer\Plugins;
 
-use Rocketeer\Facades\Rocketeer;
 use Illuminate\Support\ServiceProvider;
+use rcrowe\Campfire;
+use Rocketeer\Facades\Rocketeer;
 
 /**
  * Register the Campfire plugin with the Laravel framework and Rocketeer
@@ -18,8 +19,8 @@ class RocketeerCampfireServiceProvider extends ServiceProvider
 	{
     $this->app['config']->package('anahkiasen/rocketeer-campfire', __DIR__.'/../../config');
 
-		$this->app->bind('rocketeer.campfire', function ($app) {
-			return new Campfire($app['config']->get('rocketeer-campfire.config'));
+		$this->app->bind('campfire', function ($app) {
+			return new Campfire($app['config']->get('rocketeer-campfire::config'));
 		});
 	}
 
@@ -34,9 +35,13 @@ class RocketeerCampfireServiceProvider extends ServiceProvider
 			$branch     = $task->rocketeer->getRepositoryBranch();
 			$stage      = $task->rocketeer->getStage();
 			$connection = $task->rocketeer->getConnection();
+			$path       = $task->releasesManager->getCurrentReleasePath();
+			if ($stage) {
+				$connection = $stage.'@'.$connection;
+			}
 
-			$message = 'Just deployed branch %s on %s@%s';
-			$message = sprintf($message, $branch, $stage, $connection);
+			$message = 'Just deployed branch %s on server %s, in %s';
+			$message = sprintf($message, $branch, $connection, $path);
 
 			$task->campfire->send($message);
 		});
