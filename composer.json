@@ -1,0 +1,21 @@
+{
+	"name": "anahkiasen/rocketeer-campfire",
+	"description": "A Campfire plugin for Rocketeer",
+	"authors": [
+		{
+			"name": "Maxime Fabre",
+			"email": "ehtnam6@gmail.com"
+		}
+	],
+	"require": {
+		"php": ">=5.3.0",
+		"illuminate/support": "~4",
+		"rcrowe/campfire": "dev-master"
+	},
+	"autoload": {
+		"psr-0": {
+			"Rocketeer": "src"
+		}
+	},
+	"minimum-stability": "dev"
+}
