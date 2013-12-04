@@ -9,6 +9,14 @@ use Rocketeer\Traits\Plugin;
 class RocketeerCampfire extends Plugin
 {
 	/**
+	 * Setup the plugin
+	 */
+	public function __construct()
+	{
+		$this->configurationFolder = __DIR__.'/../../config';
+	}
+
+	/**
 	 * Bind additional classes to the Container
 	 *
 	 * @param Container $app
