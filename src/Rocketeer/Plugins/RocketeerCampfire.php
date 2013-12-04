@@ -42,6 +42,11 @@ class RocketeerCampfire extends Plugin
 	public function onQueue(TasksQueue $queue)
 	{
 		$queue->after('deploy', function ($task) {
+			// Don't send a notification if pretending to deploy
+			if ($task->command->option('pretend')) {
+				return;
+			}
+
 			// Get user name
 			$user = $task->server->getValue('campfire.name');
 			if (!$user) {
