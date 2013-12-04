@@ -4,17 +4,10 @@ namespace Rocketeer\Plugins;
 use rcrowe\Campfire;
 use Rocketeer\TasksQueue;
 use Rocketeer\Traits\Plugin;
+use Illuminate\Container\Container;
 
 class RocketeerCampfire extends Plugin
 {
-	/**
-	 * Setup the plugin
-	 */
-	public function __construct()
-	{
-		$this->configurationFolder = __DIR__.'/../../config';
-	}
-
 	/**
 	 * Bind additional classes to the Container
 	 *
