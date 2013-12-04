@@ -41,8 +41,7 @@ class RocketeerCampfire extends Plugin
 	 */
 	public function onQueue(TasksQueue $queue)
 	{
-		$me = $this;
-		$queue->after('deploy', function ($task) use ($me) {
+		$queue->after('deploy', function ($task) {
 			// Get user name
 			$user = $task->server->getValue('campfire.name');
 			if (!$user) {
