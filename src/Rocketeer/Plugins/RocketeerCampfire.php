@@ -1,10 +1,10 @@
 <?php
 namespace Rocketeer\Plugins;
 
+use Illuminate\Container\Container;
 use rcrowe\Campfire;
 use Rocketeer\TasksQueue;
 use Rocketeer\Traits\Plugin;
-use Illuminate\Container\Container;
 
 class RocketeerCampfire extends Plugin
 {

@@ -10,12 +10,22 @@ use Rocketeer\Facades\Rocketeer;
 class RocketeerCampfireServiceProvider extends ServiceProvider
 {
 	/**
-	 * Register the actions
+	 * Register classes
 	 *
 	 * @return void
 	 */
 	public function register()
 	{
-		Rocketeer::plugin('Rocketeer\Plugins\Campfire');
+		// ...
+	}
+
+	/**
+	 * Boot the plugin
+	 *
+	 * @return void
+	 */
+	public function boot()
+	{
+		Rocketeer::plugin('Rocketeer\Plugins\RocketeerCampfire');
 	}
 }
