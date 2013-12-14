@@ -72,6 +72,6 @@ class RocketeerCampfire extends Plugin
 			$message = sprintf($message, $user, $branch, $connection, $host);
 
 			$task->campfire->send($message);
-		});
+		}, -10);
 	}
 }
