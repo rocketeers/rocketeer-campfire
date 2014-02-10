@@ -26,6 +26,6 @@ class RocketeerCampfireServiceProvider extends ServiceProvider
    */
   public function boot()
   {
-    Rocketeer::plugin('Rocketeer\Plugins\RocketeerCampfire');
+    Rocketeer::plugin('Rocketeer\Plugins\Campfire\RocketeerCampfire');
   }
 }
