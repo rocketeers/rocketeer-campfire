@@ -4,9 +4,9 @@ namespace Rocketeer\Plugins;
 use Illuminate\Container\Container;
 use rcrowe\Campfire;
 use Rocketeer\TasksQueue;
-use Rocketeer\Traits\Plugin;
+use Rocketeer\Plugins\Notifier;
 
-class RocketeerCampfire extends Plugin
+class RocketeerCampfire extends Notifier
 {
   /**
    * Setup the plugin
@@ -33,45 +33,24 @@ class RocketeerCampfire extends Plugin
   }
 
   /**
-   * Register Tasks with Rocketeer
+   * Get the default message format
    *
-   * @param TasksQueue $queue
+   * @return string
+   */
+  protected function getMessageFormat()
+  {
+    return $this->app['config']->get('rocketeer-campfire::message');
+  }
+
+  /**
+   * Send a given message
+   *
+   * @param string $message
    *
    * @return void
    */
-  public function onQueue(TasksQueue $queue)
+  protected function send($message)
   {
-    $queue->after('deploy', function ($task) {
-      // Don't send a notification if pretending to deploy
-      if ($task->command->option('pretend')) {
-        return;
-      }
-
-      // Get user name
-      $user = $task->server->getValue('campfire.name');
-      if (!$user) {
-        $user = $task->command->ask('Who is deploying ?');
-        $task->server->setValue('campfire.name', $user);
-      }
-
-      // Get what was deployed
-      $branch     = $task->rocketeer->getRepositoryBranch();
-      $stage      = $task->rocketeer->getStage();
-      $connection = $task->rocketeer->getConnection();
-
-      // Get hostname
-      $credentials = array_get($task->rocketeer->getAvailableConnections(), $connection);
-      $host        = array_get($credentials, 'host');
-      if ($stage) {
-        $connection = $stage.'@'.$connection;
-      }
-
-      // Build message
-      $message = $task->config->get('rocketeer-campfire::message');
-      $message = preg_replace('#\{([0-9])\}#', '%$1\$s', $message);
-      $message = sprintf($message, $user, $branch, $connection, $host);
-
-      $task->campfire->send($message);
-    }, -10);
+    $this->app['campfire']->send($message);
   }
 }
