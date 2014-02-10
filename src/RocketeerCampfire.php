@@ -3,6 +3,7 @@ namespace Rocketeer\Plugins\Campfire;
 
 use Illuminate\Container\Container;
 use rcrowe\Campfire;
+use Rocketeer\Plugins\Notifier;
 
 class RocketeerCampfire extends Notifier
 {
