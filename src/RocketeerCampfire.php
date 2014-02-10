@@ -9,8 +9,10 @@ class RocketeerCampfire extends Notifier
   /**
    * Setup the plugin
    */
-  public function __construct()
+  public function __construct(Container $app)
   {
+    parent::__construct($app);
+
     $this->configurationFolder = __DIR__.'/../config';
   }
 
