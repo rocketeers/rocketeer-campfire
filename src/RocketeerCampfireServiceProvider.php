@@ -1,5 +1,5 @@
 <?php
-namespace Rocketeer\Plugins;
+namespace Rocketeer\Plugins\Campfire;
 
 use Illuminate\Support\ServiceProvider;
 use Rocketeer\Facades\Rocketeer;
