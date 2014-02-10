@@ -1,52 +1,37 @@
 <?php
 namespace Rocketeer\Plugins;
 
-use Illuminate\Container\Container;
+use Illuminate\Support\ServiceProvider;
 use rcrowe\Campfire;
-use Rocketeer\TasksQueue;
-use Rocketeer\Traits\Plugin;
+use Rocketeer\Facades\Rocketeer;
 
-class RocketeerCampfire extends Plugin
+/**
+ * Register the Campfire plugin with the Laravel framework and Rocketeer
+ */
+class RocketeerCampfireServiceProvider extends ServiceProvider
 {
 	/**
-	 * Setup the plugin
-	 */
-	public function __construct()
-	{
-		$this->configurationFolder = __DIR__.'/../../config';
-	}
-
-	/**
-	 * Bind additional classes to the Container
-	 *
-	 * @param Container $app
+	 * Register the actions
 	 *
 	 * @return void
 	 */
-	public function register(Container $app)
+	public function register()
 	{
-		$app->bind('campfire', function ($app) {
+		$this->app['config']->package('anahkiasen/rocketeer-campfire', __DIR__.'/../config');
+
+		$this->app->bind('campfire', function ($app) {
 			return new Campfire($app['config']->get('rocketeer-campfire::config'));
 		});
-
-		return $app;
 	}
 
 	/**
-	 * Register Tasks with Rocketeer
-	 *
-	 * @param TasksQueue $queue
+	 * Register Campfire in the Rocketeer hooks
 	 *
 	 * @return void
 	 */
-	public function onQueue(TasksQueue $queue)
+	public function boot()
 	{
-		$queue->after('deploy', function ($task) {
-			// Don't send a notification if pretending to deploy
-			if ($task->command->option('pretend')) {
-				return;
-			}
-
+		Rocketeer::after('deploy', function ($task) {
 			// Get user name
 			$user = $task->server->getValue('campfire.name');
 			if (!$user) {
@@ -72,6 +57,6 @@ class RocketeerCampfire extends Plugin
 			$message = sprintf($message, $user, $branch, $connection, $host);
 
 			$task->campfire->send($message);
-		}, -10);
+		});
 	}
 }

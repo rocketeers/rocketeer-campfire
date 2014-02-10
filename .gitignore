@@ -1,4 +1,6 @@
-/vendor
-composer.phar
+# Dependnecies
+vendor
+
+# Cache and compiled
 composer.lock
 .DS_Store

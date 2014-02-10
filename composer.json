@@ -1,6 +1,6 @@
 {
 	"name": "anahkiasen/rocketeer-campfire",
-	"description": "A Campfire plugin for Rocketeer",
+	"description": "Campfire plugin for Rocketeer",
   "license": "MIT",
   "keywords": [
     "rocketeer",
@@ -20,8 +20,8 @@
 		"rcrowe/campfire": "dev-master"
 	},
 	"autoload": {
-		"psr-0": {
-			"Rocketeer": "src"
+		"psr-4": {
+			"Rocketeer\\Plugins\\": "src"
 		}
 	},
 	"minimum-stability": "dev"
