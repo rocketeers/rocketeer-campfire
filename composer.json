@@ -17,12 +17,11 @@
 	"require": {
 		"php": ">=5.3.0",
 		"illuminate/support": "~4",
-		"rcrowe/campfire": "dev-master"
+		"rcrowe/campfire": "0.1.2"
 	},
 	"autoload": {
 		"psr-4": {
 			"Rocketeer\\Plugins\\Campfire\\": "src"
 		}
-	},
-	"minimum-stability": "dev"
+	}
 }
