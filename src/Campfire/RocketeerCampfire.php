@@ -50,7 +50,7 @@ class RocketeerCampfire extends Notifier
    *
    * @return void
    */
-  protected function send($message)
+  public function send($message)
   {
     $this->app['campfire']->send($message);
   }
