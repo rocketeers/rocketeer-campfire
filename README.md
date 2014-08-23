@@ -10,7 +10,7 @@ To setup add this to your `composer.json` and update :
 "anahkiasen/rocketeer-campfire": "dev-master"
 ```
 
-Then you'll need to set it up, so do `artisan config:publish anahkiasen/rocketeer-campfire` and complete the configuration in `app/packages/anahkiasen/rocketeer-campfire/config.php` :
+Then you'll need to set it up, so do `artisan config:publish rocketeer/rocketeer-campfire` and complete the configuration in `app/packages/rocketeer/rocketeer-campfire/config.php` :
 
 - subdomain: http://{subdomain}.campfirenow.com.
 - room: Numeric ID for the room you want the message sent to.
