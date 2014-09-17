@@ -3,9 +3,9 @@
 return array(
 
 	// Campfire room credentials
-	'subdomain' => '',
-	'room'      => '',
-	'key'       => '',
+	'subdomain'     => '',
+	'room'          => '',
+	'key'           => '',
 
 	// Message
 	// You can use the following variables :
@@ -13,6 +13,7 @@ return array(
 	// 2: Branch
 	// 3: Connection and stage
 	// 4: Host
-	'message' => '{1} finished deploying branch "{2}" on "{3}" ({4})',
+	'before_deploy' => '{1} started deploying branch "{2}" on "{3}" ({4})',
+	'after_deploy'  => '{1} finished deploying branch "{2}" on "{3}" ({4})',
 
 );

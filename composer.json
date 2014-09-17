@@ -1,5 +1,5 @@
 {
-	"name": "anahkiasen/rocketeer-campfire",
+	"name": "rocketeers/rocketeer-campfire",
 	"description": "Campfire plugin for Rocketeer",
   "license": "MIT",
   "keywords": [
@@ -15,10 +15,12 @@
 		}
 	],
 	"require": {
-		"php": ">=5.3.0",
-		"illuminate/support": "~4",
+		"php": ">=5.4.0",
+		"anahkiasen/rocketeer": "2.0.*@dev",
 		"rcrowe/campfire": "0.1.2"
 	},
+	"minimum-stability": "dev",
+	"prefer-stable": true,
 	"autoload": {
 		"psr-4": {
 			"Rocketeer\\Plugins\\Campfire\\": "src/Campfire"
