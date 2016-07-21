@@ -4,22 +4,21 @@ Sends a basic deployment message to a Campfire room :
 
 ![Campfire](http://i.imgur.com/iIzpvyr.png)
 
-To setup add this to your `composer.json` and update :
+## Installation
 
-```json
-"anahkiasen/rocketeer-campfire": "dev-master"
+```shell
+rocketeer plugin:install anahkiasen/rocketeer-campfire
 ```
 
-Then you'll need to set it up, so do `artisan config:publish rocketeer/rocketeer-campfire` and complete the configuration in `app/packages/rocketeer/rocketeer-campfire/config.php` :
-
-- subdomain: http://{subdomain}.campfirenow.com.
-- room: Numeric ID for the room you want the message sent to.
-- key: API key for the user you the message sent from.
-
-Once that's done add the following to your providers array in `app/config/app.php` :
+Then add this to the `plugins.loaded` array in your configuration:
 
 ```php
-'Rocketeer\Plugins\RocketeerCampfireServiceProvider',
+<?php
+'loaded' => [
+    'Rocketeer\Plugins\Campfire\RocketeerCampfire',
+],
 ```
 
-And that's pretty much it.
+## Usage
+
+To export the configuration, simply run `rocketeer plugin:config` then edit `.rocketeer/config/plugins/rocketeer-campfire`.

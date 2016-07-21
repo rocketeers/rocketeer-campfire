@@ -1,29 +1,33 @@
 {
-	"name": "rocketeers/rocketeer-campfire",
-	"description": "Campfire plugin for Rocketeer",
+  "name": "rocketeers/rocketeer-campfire",
+  "description": "Campfire plugin for Rocketeer",
   "license": "MIT",
   "keywords": [
     "rocketeer",
     "deployment",
-    "campfire",
-    "laravel"
+    "campfire"
   ],
-	"authors": [
-		{
-			"name": "Maxime Fabre",
-			"email": "ehtnam6@gmail.com"
-		}
-	],
-	"require": {
-		"php": ">=5.4.0",
-		"anahkiasen/rocketeer": "2.0.*@dev",
-		"rcrowe/campfire": "0.1.2"
-	},
-	"minimum-stability": "dev",
-	"prefer-stable": true,
-	"autoload": {
-		"psr-4": {
-			"Rocketeer\\Plugins\\Campfire\\": "src/Campfire"
-		}
-	}
+  "authors": [
+    {
+      "name": "Maxime Fabre",
+      "email": "ehtnam6@gmail.com"
+    }
+  ],
+  "require": {
+    "php": ">=5.6.0",
+    "anahkiasen/rocketeer": "3.0.x@dev",
+    "rcrowe/campfire": "0.1.2"
+  },
+  "autoload": {
+    "psr-4": {
+      "Rocketeer\\Plugins\\Campfire\\": "src/Campfire"
+    }
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "extra": {
+    "branch-alias": {
+      "dev-develop": "3.0-dev"
+    }
+  }
 }
