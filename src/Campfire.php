@@ -1,10 +1,10 @@
 <?php
 namespace Rocketeer\Plugins\Campfire;
 
-use rcrowe\Campfire;
+use rcrowe\Campfire as CampfireWrapper;
 use Rocketeer\Plugins\AbstractNotifier;
 
-class RocketeerCampfire extends AbstractNotifier
+class Campfire extends AbstractNotifier
 {
     /**
      * @var string
@@ -17,7 +17,7 @@ class RocketeerCampfire extends AbstractNotifier
 	public function register()
 	{
 		$this->container->share('campfire', function () {
-			return new Campfire($this->getPluginOption());
+			return new CampfireWrapper($this->getPluginOption());
 		});
 	}
 
