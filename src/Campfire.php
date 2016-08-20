@@ -24,7 +24,7 @@ class Campfire extends AbstractNotifier
 	/**
 	 * {@inheritdoc}
 	 */
-	public function send($message)
+	public function send($message, $type)
 	{
         /** @var Campfire $campfire */
         $campfire = $this->container->get('campfire');
